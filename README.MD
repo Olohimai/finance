@@ -1,74 +1,9 @@
+# Finance microservice
 
-<!-- localhost:8081/accounts -->
-{
-    "studentId": "c7465688"
-}
-{
-  "id": 4,
-  "studentId": "c7465688",
-  "hasOutstandingBalance": false,
-  "_links": {
-    "self": {
-      "href": "http://localhost:8081/accounts/student/c7465688"
-    },
-    "accounts": {
-      "href": "http://localhost:8081/accounts"
-    }
-  }
-}
+The application is Finance microservice that integrates with a student microservices
 
+When a student is created, a request is sent to the Finance microservice to create an account.
 
-<!-- localhost:8081/invoices -->
+When you enrol in a course, a request is sent to the Finance microservice to create an invoice.
 
-{
-    "amount": "432",
-    "account":{"studentId": "c7465688"},
-    "dueDate": "2022-04-06",
-    "type": "LIBRARY_FINE"
-}
-{
-  "id": 7,
-  "reference": "QPLPLP2F",
-  "amount": 432.0,
-  "dueDate": "2022-04-06",
-  "type": "LIBRARY_FINE",
-  "status": "OUTSTANDING",
-  "studentId": "c7465688",
-  "_links": {
-    "self": {
-      "href": "http://localhost:8081/invoices/reference/QPLPLP2F"
-    },
-    "invoices": {
-      "href": "http://localhost:8081/invoices"
-    },
-    "cancel": {
-      "href": "http://localhost:8081/invoices/QPLPLP2F/cancel"
-    },
-    "pay": {
-      "href": "http://localhost:8081/invoices/QPLPLP2F/pay"
-    }
-  }
-}
-
-<!-- localhost:8081/invoices/reference/QPLPLP2F -->
-<!-- result as above -->
-
-<!-- http://localhost:8081/invoices/QPLPLP2F/pay -->
-
-{
-  "id": 7,
-  "reference": "QPLPLP2F",
-  "amount": 432.0,
-  "dueDate": "2022-04-06",
-  "type": "LIBRARY_FINE",
-  "status": "PAID",
-  "studentId": "c7465688",
-  "_links": {
-    "self": {
-      "href": "http://localhost:8081/invoices/reference/QPLPLP2F"
-    },
-    "invoices": {
-      "href": "http://localhost:8081/invoices"
-    }
-  }
-}
+Upon checking the eligibility to graduate, a request is sent to the Finance microservice to see if there are any outstanding invoices.
