@@ -1,45 +1,50 @@
-<%- include('layout.ejs'); %> 
-<div class="container-fluid">
-    <h3>Invoice</h3>
-    <dl class="row col-md-3">
-        <dt class="col-sm-9">Reference:</dt>
-        <dd class="col-sm-3"><%= invoice.reference %></dd>
-        <dt class="col-sm-9">Student ID:</dt>
-        <dd class="col-sm-3"><%= invoice.account.studentId %></dd>
-        <dt class="col-sm-9">Amount:</dt>
-        <dd class="col-sm-3"><%= invoice.amount %></dd> 
-        <dt class="col-sm-9">Due Date:</dt>
-        <dd class="col-sm-3"><%= invoice.dueDate %></dd> 
-        <dt class="col-sm-9">Type:</dt>
-        <dd class="col-sm-3"><%= invoice.type %></dd>
-        <dt class="col-sm-9">Status:</dt>
-        <dd class="col-sm-3"><%= invoice.status %></dd>
-    </dl>
-    <div class="row">
-        <div class="btn-group">
-            <div class="col-xs-6">
-                <a class="btn btn-secondary btn-block" href="/portal" role="button">Find
-                    Another Invoice</a>
-            </div>
-            <div class="col-xs-6">
-                <% if(invoice.status == 'OUTSTANDING') {%>
-                <div>
-                    <form action="/portal/pay" th:object="${invoice}" method="post">
-                        <input type="hidden" id="reference" name="reference" value= <%= invoice.reference %> />
-                        <button class="btn btn-primary btn-block" type="submit" name="pay" value="submit">Pay Invoice
-                        </button>
-                    </form>
-                </div>
-                <% } %>
-            </div>
-        </div>
-    </div>
+<%- include('layout.ejs'); %>
+<div class="px-10 py-12">
+<div>
+<div class="flex justify-between">
+<div class="">
+<div class="space-y-4">
+<div class="text-4xl text-black font-bold">Student ID: <span class="text-gray-500"><%= invoice.account.studentId %></span></div>
+    <div class="text-2xl font-bold">INVOICE REFERENCE: <span><%= invoice.reference %> </span></div>
 </div>
-<div class="container-fluid">
-    <% if(message) {%>
-    
-        <div class="alert alert-success w-25"><%= message %></div>
-        <% } %>
+<div class="space-y-2 mt-4">
+<div class="font-medium text-base">Amount: <span> <%= invoice.amount %></span></div>
+<div class="font-medium text-base">Due Date:<span> <%= invoice.dueDate %></span></div>
+<div class="font-medium text-base">Type:<span> <%= invoice.type %></span></div>
+</div>
+</div>
+<div class="px-3 py-2 h-16  text-3xl font-bold text-green-700 border-4 border-green-700 border-dotted"> <%= invoice.status %></div>
+</div>
+<div class="mt-4">
+  <div class="flex items-center space-x-3">
+    <a class="py-2 px-3 bg-blue-500 text-white rounded" href="/portal" role="button">Pay Another Invoice</a>
+<div>
+ <% if(invoice.status == 'OUTSTANDING') {%>
+   <div>
+   <form action="/portal/pay" th:object="${invoice}" method="post">
+        <input type="hidden" id="reference" name="reference" value= <%= invoice.reference %> />
+            <button class="py-2 px-3 text-blue-500 border-blue-500 border rounded" type="submit" name="pay" value="submit">Pay Invoice
+                 </button>
+   </form>
+ </div>
+  <% } %>
+</div>
+  </div>
+</div>
+</div>
+
+     <div class="flex bg-red-lighter max-w-sm my-4">
+      <% if(message) {%>
+          <div class="w-auto text-red-500 opacity-75 items-center">
+              <span class="text-lg font-bold pb-4">
+                  Heads Up!
+              </span>
+              <p class="leading-tight">
+                 <%= message %>
+              </p>
+          </div>
+           <% } %>
+      </div>
 </div>
 </body>
 </html>
