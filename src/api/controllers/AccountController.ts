@@ -2,8 +2,7 @@ import "reflect-metadata";
 import { AccountInput } from "../../db/models/Account";
 import { AccountService } from "../services/AccountService";
 import { AccountDAO } from '../daos/AccountDAO';
-export class AccountController { 
-//   constructor(private service: AccountService) {}
+export class AccountController {
 private service: AccountService;
 constructor(){
     this.service = new AccountService();
@@ -15,4 +14,3 @@ constructor(){
     return await this.service.getAccountByStudentId(studentId);
   };
 }
-// export default AccountController;
